@@ -4,15 +4,23 @@ import ReactDOM from 'react-dom'
 const Statistics = (props) => {
   return (
     <div>
-      <p>Good: {props.good}</p>
-      <p>Neutral: {props.neutral}</p>
-      <p>Bad: {props.bad}</p>
-      <p>All: {props.good-props.bad}</p>
-      <p>Average: {(props.good+props.neutral+props.bad)/3}</p>
-      <p>Positive: {(props.good/((props.good+props.neutral+props.bad)))*100} %</p>
+      <StatisticLine text = "Good" val = {props.good}/>
+      <StatisticLine text = "Neutral" val = {props.neutral}/>
+      <StatisticLine text = "Bad" val = {props.bad}/>
+      <StatisticLine text = "All" val = {props.good-props.bad}/>
+      <StatisticLine text = "Average" val = {(props.good+props.neutral+props.bad)/3}/>
+      <StatisticLine text = "Positive" val = {(props.good/((props.good+props.neutral+props.bad)))*100 +"%"}/>
     </div>
   )
 }
+
+// komponentti näyttää yhden tietyn tilastorivin 
+const StatisticLine = (props) => {
+  return (
+    <p>{props.text}: {props.val}</p>
+  )
+}
+
   // komponentti Render ilmoittaa, mikäli palautetta ei ole annettu
 const Render = (props) => {
   if(props.good + props.neutral + props.bad === 0) {
@@ -29,9 +37,10 @@ const Render = (props) => {
     )
 }
 
+// komponentti hoitaa yhden painikkeen muutokset
 const Button = (props) => {
   return (
-    <button onClick = {() => {props.state}({props.type}+1)} good </button>
+    <button onClick = {() => props.state(props.type+1)}>{props.name}</button>
   )
 }
 
