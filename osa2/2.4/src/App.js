@@ -48,6 +48,8 @@ const App = () => {
     }
   ]
 
+// hyödynnetään map metodia ja Course komponenttia jokaisen kurssikokonaisuuden
+// käsittelyssä
   return (
     <div>
       <h1> Web development curriculum </h1>
