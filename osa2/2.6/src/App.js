@@ -10,11 +10,31 @@ const App = () => {
 // metodi luo uuden olion personObject ja antaa lisää tämän persons listaan
 // jonka lisäksi metodi palauttaa lisättävän henkilön nimen tyhjäksi
 // merkkijonoksi
+
+const addPerson = (event) => {
+  event.preventDefault()
+  const personObject = {
+    name: newName
+  }
+  setPersons(persons.concat(personObject))
+  setNewName('')
+}
+
+// tapahtumakäsittelijä päivittää uuden lisäyksen setNewName tilaa
+// näyttämällä tekstin syötteessä (input)
+const handlePersonAddition = (event) => {
+    setNewName(event.target.value)
+}
+
   const addPerson = (event) => {
     event.preventDefault()
     const personObject = {
       name: newName
     }
+    if(persons.filter(person => person.name === newName).length > 0) {
+      return window.alert(`${newName} is already added to phonebook`)
+    }
+
     setPersons(persons.concat(personObject))
     setNewName('')
   }
