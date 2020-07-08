@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios'
 
+
 //komponentti päivittää syötetekstin ja aktivoi tapahtumakäsittelijän
 //handleFilterAddition kun syöte muuttuu
 const Filter = ({changeFunc, value}) => {
@@ -15,6 +16,26 @@ const Filter = ({changeFunc, value}) => {
     </div>
   )
 }
+
+// komponentti palauttaa yhden maan "country" tiedot
+const Country = ({country}) => {
+  return (
+    <div>
+      <h1>{country.name}</h1>
+      <p>capital: {country.capital}</p>
+      <p>population: {country.population}</p>
+      <div>
+        <h1>Languages</h1>
+        <ul>
+        {country.languages.map(language =>
+          <li key = {language.name}> {language.name} </li>)}
+        </ul>
+      </div>
+      <img key = {country.name} src = {country.flag} width ="150px" alt = "img"></img>
+    </div>
+  )
+}
+
 
 // komponentti palauttaa maiden listan tai yhden maan tiedot
 const Render = (props) => {
@@ -43,17 +64,7 @@ const Render = (props) => {
   else if(x.length === 1) {
     return (
       <div>
-        {x.map(country =>
-          <h1 key = {country.name}> {country.name}</h1>)}
-        {x.map(country =>
-          <p key = {country.name}> capital: {country.capital}</p>)}
-        {x.map(country =>
-          <p key = {country.name}> population: {country.population}</p>)}
-        <h1> Languages </h1>
-        {x.map(country =>
-          <ul key = {country.name}> {country.languages.map(l => <li key = {l.name}> {l.name} </li>)}</ul>)}
-        {x.map(country =>
-          <img key = {country.name} src = {country.flag} width ="150px" alt = "img"></img>)}
+        <Country country = {x[0]} />
       </div>
     )
   }else{
@@ -69,6 +80,7 @@ const App = () => {
   const [countries, setCountries] = useState([])
   const [showAll, setShowAll] = useState(false)
   const [newFilter, setNewFilter] = useState('')
+  const [weather, setWeather] = useState([])
 
   useEffect(() => {
     console.log('effect')
