@@ -47,6 +47,7 @@ const PersonForm = (props) => {
 
 
 // komponentti palauttaa näytettävien henkilöiden nimet ja numerot
+// 2.17 map funktioon lisätty tapahtumakäsittelijän käyttö 
 const Persons = (props) => {
   return (
     <div>
@@ -101,6 +102,7 @@ const App = () => {
         })
   }
 
+// 2.17 metodi toimii tapahtumakäsittelijänä henkilön poistamisessa
   const removePerson = (event) => {
     const id = event.id
     const result = window.confirm("Delete "+event.name+"?")
