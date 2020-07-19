@@ -20,7 +20,6 @@ const modify = (person, persons, newN) => {
   const url = baseURL+`/${person.id}`
   const changedPerson = {...person, number: newN}
   const request = axios.put(url, changedPerson)
-  console.log(request)
   return request.then(response => response.data)
 }
 

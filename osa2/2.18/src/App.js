@@ -47,7 +47,7 @@ const PersonForm = (props) => {
 
 
 // komponentti palauttaa näytettävien henkilöiden nimet ja numerot
-// 2.17 map funktioon lisätty tapahtumakäsittelijän käyttö 
+// 2.17 map funktioon lisätty tapahtumakäsittelijän käyttö
 const Persons = (props) => {
   return (
     <div>
@@ -90,9 +90,16 @@ const App = () => {
       number: newNumber
     }
     if(persons.filter(person => person.name === newName).length > 0) {
-      return window.alert(`${newName} is already added to phonebook`)
-    }
-
+      if(window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+        personService
+          .modify(persons.find(n => n.name === newName), persons, newNumber)
+            .then(modifiedPerson => {
+              setPersons(persons.map(p => p.id !== modifiedPerson.id ? p : modifiedPerson))
+              setNewName('')
+              setNewNumber('')
+            })
+      }
+    } else {
     personService
       .create(personObject)
         .then(returnedPerson => {
@@ -100,6 +107,7 @@ const App = () => {
           setNewName('')
           setNewNumber('')
         })
+    }
   }
 
 // 2.17 metodi toimii tapahtumakäsittelijänä henkilön poistamisessa
@@ -110,7 +118,6 @@ const App = () => {
     personService
       .deleteOne(id)
         .then(newPersons => {
-          console.log(newPersons)
           setPersons(persons.filter(x => x.id !== id))
         })
     }
@@ -138,7 +145,6 @@ const App = () => {
 // näyttämällä tekstin syötteessä (input)
   const handleFilterAddition = (event) => {
     setNewFilter(event.target.value)
-    //console.log(persons.filter(person => person.name.includes(newFilter) !== true))
     if(newFilter !== '') {
       setShowAll(persons.filter(person => person.name.includes(newFilter) !== true) > 0)
     } else {
