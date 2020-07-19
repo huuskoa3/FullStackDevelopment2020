@@ -57,7 +57,7 @@ const Persons = (props) => {
 }
 
 // komponentti palauttaa tulosteen joka sisältää tapahtumaviestin
-// muotoilulla ".message" 
+// muotoilulla ".message"
 const Message = ({message}) => {
   if(message === null) {
     return null
@@ -109,6 +109,9 @@ const App = () => {
               setNewNumber('')
             })
         setNewMessage(`Updated "${newName}"`)
+        setTimeout(() => {
+          setNewMessage(null)
+        }, 5000)
       }
     } else {
     personService
@@ -119,6 +122,9 @@ const App = () => {
           setNewNumber('')
         })
         setNewMessage(`Added "${newName}"`)
+        setTimeout(() => {
+          setNewMessage(null)
+        }, 5000)
     }
   }
 
@@ -134,7 +140,9 @@ const App = () => {
           setPersons(persons.filter(x => x.id !== id))
         })
         setNewMessage(`Removed "${event.name}"`)
-
+        setTimeout(() => {
+          setNewMessage(null)
+        }, 5000)
     }
   }
 

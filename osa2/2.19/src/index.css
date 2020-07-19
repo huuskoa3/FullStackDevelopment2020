@@ -12,6 +12,18 @@ code {
     monospace;
 }
 
+.error {
+  color: red;
+  font-style: italic;
+  font-weight: bold;
+  background: white;
+  font-size: 28px;
+  border-style: none;
+  border-radius: 0px;
+  padding: 0px;
+  margin-bottom: 0px;
+}
+
 .message {
   color: green;
   font-style: italic;
